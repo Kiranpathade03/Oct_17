@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #active {
+            color: red;
+        }
+        
+        #parent {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="main">
+    <div id="parent">
+        <table border="">
+            <tr>
+                <th>Check</th>
+                <th>No</th>
+                <th>Remark</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="" class="checkbox"></td>
+                <td>01</td>
+                <td><input type="text" placeholder="Enter a Remark" class="inputbox" disabled></td>
+                <td><input type="submit" class="active" value="Active"></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="" class="checkbox"></td>
+                <td>02</td>
+                <td><input type="text" placeholder="Enter a Remark" class="inputbox" disabled></td>
+                <td><input type="submit" class="active" value="Active"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        const main = document.getElementById('main');
+        const parent = document.getElementById('parent');
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const inputboxes = document.querySelectorAll('.inputbox');
+        const actives = document.querySelectorAll('.active');
+
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    actives[index].style.color = 'black';
+                    inputboxes[index].disabled = false;
+                } else {
+                    actives[index].style.color = 'red';
+                    inputboxes[index].disabled = true;
+                }
+            });
+        });
+
+        main.addEventListener('change', function() {
+            if (this.checked) {
+                parent.style.display = 'block';
+            } else {
+                parent.style.display = 'none';
+            }
+        });
+
+        inputboxes.forEach(inputbox => {
+            inputbox.addEventListener('input', function() {
+                if (inputbox.value.length > 10) {
+                    inputbox.style.color = 'red';
+                } else {
+                    inputbox.style.color = 'green';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
